@@ -7,4 +7,5 @@ do
 done
 echo "$(date) - connected successfully"
 
-java -jar ordering-*.jar
+java -jar usr/local/app/ordering-service-0.1.0.jar -spring.config.location=application.properties
+
