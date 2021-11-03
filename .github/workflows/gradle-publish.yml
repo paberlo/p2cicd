@@ -41,7 +41,7 @@ jobs:
          
        - name: dockerizar el front y el backend
          run: | 
-            cp src/Clients/build/libs/*.war deploy/docker/Clients/drop
+            cp src/Clients/build/libs/*.war deploy/docker/Clients/drop #copiar el resultado del build para la nueva imagen
             docker build -t p2cicd/web deploy/docker/Clients
-            cp src/Backend/OrderService/build/libs/ordering* deploy/docker/Order/drop/ 
+            cp src/Backend/OrderService/build/libs/ordering* deploy/docker/Order/drop #copiar el resultado del build para la nueva imagen
             docker build -t p2cicd/order deploy/docker/Order
