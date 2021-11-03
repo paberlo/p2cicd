@@ -27,10 +27,10 @@ jobs:
 
     - name: Build with Gradle
       run: |
-       cd src/Backend/OrderService
-       ./gradlew build test
-       cd  ../../src/Clients
-       ./gradlew build
+       cd ./src/Backend/OrderService
+       gradlew build test
+       cd  ./src/Clients
+       gradlew build
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
