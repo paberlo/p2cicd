@@ -1,0 +1,23 @@
+name: Dockerizar los builds
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+   
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: dockerizar el frontend
+      run: | 
+        cp src/Clients/build/libs/*.war deploy/docker/Clients/drop
+        docker build -t p2cicd/web --file deploy/docker/Clients/Dockerfile 
+      
+      
+      /home/runner/work/p2cicd/p2cicd/src/Backend/OrderService/
