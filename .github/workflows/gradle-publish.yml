@@ -41,8 +41,7 @@ jobs:
          run: cp src/Clients/build/libs/*.war deploy/docker/Clients/drop
          
        - name: dockerizar el frontend
-         working-directory: deploy/docker/Clients
-         run: docker build -t p2cicd/web -f Dockerfile 
+         run: docker build -t p2cicd/web deploy/docker/Clients
         
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
