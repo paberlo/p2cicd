@@ -1,0 +1,42 @@
+steps:
+# Java tool installer
+- task: JavaToolInstaller@0
+    inputs:
+      versionSpec: "8"
+      jdkArchitectureOption: x64 #cambia a x86 si es tu caso
+      jdkSourceOption: LocalDirectory
+      #se puede descargar de https://jdk.java.net/java-se-ri/8-MR3
+      jdkFile: "/builds/openjdk-11.0.2_linux-x64_bin.tar.gz" #aquí pega el contenido de tu JAVA_HOME
+      jdkDestinationDirectory: "/builds/binaries/externals"
+      cleanDestinationDirectory: true
+
+
+language: java
+jdk: openjdk8
+before_script:
+  - chmod +x  $TRAVIS_BUILD_DIR/src/Backend/OrderService/gradlew
+  - chmod +x  $TRAVIS_BUILD_DIR/src/Clients/gradlew
+script: 
+  - cd  $TRAVIS_BUILD_DIR/src/Backend/OrderService
+  - ./gradlew build test
+  - cd  $TRAVIS_BUILD_DIR/src/Clients
+  - ./gradlew build
+  
+#las variables de entorno para los credenciales de acceso a DockerHub las 
+#creamos en travs-ci.com
+#after_success:
+#   - cp $TRAVIS_BUILD_DIR/src/Clients/build/libs/*.war $TRAVIS_BUILD_DIR/deploy/docker/Clients/drop/ 
+#   - docker login -u $DOCKER_USER -p $DOCKER_PASS
+#   - export REPO=p2cicd
+#   - export TAG=web
+#   - docker build -t $REPO/$TAG $TRAVIS_BUILD_DIR/deploy/docker/Clients
+#   - docker tag $REPO/$TAG $DOCKER_USER/$REPO:$TAG
+#   - docker push $DOCKER_USER/$REPO:$TAG
+#   - cp $TRAVIS_BUILD_DIR/src/Backend/OrderService/build/libs/ordering* $TRAVIS_BUILD_DIR/deploy/docker/Order/drop/ 
+#   - export TAG=order
+#   - docker build -t $REPO/$TAG $TRAVIS_BUILD_DIR/deploy/docker/Order
+#   - docker tag $REPO/$TAG $DOCKER_USER/$REPO:$TAG
+#   - docker push $DOCKER_USER/$REPO:$TAG
+# no creamos la imagen de mongodb con el archivo mongorecords.js porque es estático y ya lo hemos subido a DockerHub manualmente.
+
+
