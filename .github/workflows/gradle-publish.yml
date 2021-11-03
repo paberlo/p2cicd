@@ -29,17 +29,19 @@ jobs:
          with:
             gradle-version: 2.1
             
-       - name: Build with Gradle
+       - name: Build backend
          working-directory: src/Backend/OrderService
-         run: |
-            ./gradlew build test
-            #./gradlew build
+         run: ./gradlew build test
+         
+       - name: Build frontend
+         working-directory: src/Clients
+         run: ./gradlew build
         
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
-       - name: Publish to GitHub Packages
-         run: gradle publish
-         env:
-            USERNAME: ${{ github.actor }}
-            TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   - name: Publish to GitHub Packages
+    #     run: gradle publish 
+    #     env:
+   #         USERNAME: ${{ github.actor }}
+    #        TOKEN: ${{ secrets.GITHUB_TOKEN }}
