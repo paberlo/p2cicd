@@ -37,10 +37,12 @@ jobs:
          working-directory: src/Clients
          run: ./gradlew build
          
+       - name: mover el build a la carpeta de dockerizacion
+         run: cp src/Clients/build/libs/*.war deploy/docker/Clients/drop
+         
        - name: dockerizar el frontend
-         run: | 
-          cp src/Clients/build/libs/*.war deploy/docker/Clients/drop
-          docker build -t p2cicd/web -f Dockerfile deploy/docker/Clients/
+         working-directory: deploy/docker/Clients
+         run: docker build -t p2cicd/web -f Dockerfile 
         
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
