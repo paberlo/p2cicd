@@ -27,7 +27,7 @@ jobs:
          with:
             gradle-version: 2.1
             
-       #### BUILDS Y DOCKERIZACION ######
+       #### BUILDS  ######
        - name: hacer build del frontend 
          working-directory: src/Clients
          run: ./gradlew build
