@@ -38,7 +38,9 @@ jobs:
          run: ./gradlew build
          
        - name: mover el build a la carpeta de dockerizacion
-         run: cp src/Clients/build/libs/*.war deploy/docker/Clients/drop
+         run: |
+            cp src/Clients/build/libs/*.war deploy/docker/Clients/drop
+            ls deploy/docker/Clients/drop
          
        - name: dockerizar el frontend
          run: docker build -t p2cicd/web deploy/docker/Clients
