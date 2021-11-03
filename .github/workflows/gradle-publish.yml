@@ -51,5 +51,14 @@ jobs:
        - name: Login to DockerHub
          uses: docker/login-action@v1 
          with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }} # crear la variable de entorno en Settings --> Secrets
+          password: ${{ secrets.DOCKERHUB_TOKEN }} # crear la variable de entorno en Settings --> Secrets
+       - name: Etiquetar con formato DockerHub
+         run: |
+          docker tag p2cicd/web ${{ secrets.DOCKERHUB_USERNAME }}/p2cicd:web
+          docker tag p2cicd/order ${{ secrets.DOCKERHUB_USERNAME }}/p2cicd:order
+       - name: Push a DockerHub
+         run: |
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/p2cicd:order
+            docker push ${{ secrets.DOCKERHUB_USERNAME }}/p2cicd:web
+           
